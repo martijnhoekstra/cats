@@ -17,11 +17,12 @@ import compat.scalaVersionSpecific._
  * to encode the result of the comparisons x <= y and x >= y.
  * The truth table is defined as follows:
  *
- * x <= y    x >= y      Double
- * true      true        = 0.0     (corresponds to x = y)
- * false     false       = NaN     (x and y cannot be compared)
- * true      false       = -1.0    (corresponds to x < y)
- * false     true        = 1.0     (corresponds to x > y)
+ * |x <= y  |x >= y    |result    |note
+ * | :--    | :--      | --:      |:--
+ * |true    |true      | 0.0      |(corresponds to x = y)
+ * |false   |false     | NaN      |(x and y cannot be compared)
+ * |true    |false     | -1.0     |(corresponds to x < y)
+ * |false   |true      | 1.0      |(corresponds to x > y)
  */
 trait PartialOrder[@sp A] extends Any with Eq[A] { self =>
 
@@ -29,6 +30,7 @@ trait PartialOrder[@sp A] extends Any with Eq[A] { self =>
    * Result of comparing `x` with `y`. Returns NaN if operands are not
    * comparable. If operands are comparable, returns a Double whose
    * sign is:
+   *
    * - negative iff `x < y`
    * - zero     iff `x = y`
    * - positive iff `x > y`
@@ -46,6 +48,7 @@ trait PartialOrder[@sp A] extends Any with Eq[A] { self =>
    * Result of comparing `x` with `y`. Returns None if operands are
    * not comparable. If operands are comparable, returns Some[Int]
    * where the Int sign is:
+   *
    * - negative iff `x < y`
    * - zero     iff `x = y`
    * - positive iff `x > y`
